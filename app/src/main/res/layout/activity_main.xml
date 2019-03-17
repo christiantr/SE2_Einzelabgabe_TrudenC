@@ -41,5 +41,11 @@
             android:textAllCaps="false"
             android:textSize="18sp"
             android:textStyle="italic" />
+
+        <Button
+            android:id="@+id/buttonExchangeChars"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Exchange Characters" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

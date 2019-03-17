@@ -18,8 +18,10 @@ import java.util.Optional;
 
 public class MainActivity extends AppCompatActivity {
     Button sendButton;
+    Button exchangeCharsButton;
     EditText matrikelText;
     TextView answerText;
+
 
     private static String HOST = "se2-isys.aau.at";
     private static int PORT = 53212;
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         sendButton = findViewById(R.id.buttonSend);
         matrikelText = findViewById(R.id.editTextMatrikel);
         answerText = findViewById(R.id.textViewResponse);
+        exchangeCharsButton = findViewById(R.id.buttonExchangeChars);
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +74,16 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
+        exchangeCharsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String matrikelN = matrikelText.getText().toString();
+
+                answerText.setText(exchangeCharacters(matrikelN));
+
+            }
+        });
+
 
     }
 
@@ -84,5 +97,20 @@ public class MainActivity extends AppCompatActivity {
         clientSocket.close();
 
         return answer;
+    }
+
+    private String exchangeCharacters(String matrikelN) {
+        int FP = 96;
+        StringBuilder res = new StringBuilder(matrikelN);
+
+        for (int i = 0; i < res.length(); i++) {
+            int num = Integer.parseInt(res.substring(i, i + 1));
+            if (i % 2 == 0 && num > 0 && num < 10) {
+                res.replace(i, i + 1, String.valueOf((char) (FP + num)));
+            }
+
+        }
+
+        return res.toString();
     }
 }
